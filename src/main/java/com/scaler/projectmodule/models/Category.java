@@ -12,4 +12,8 @@ public class Category {
         this.id = id;
         this.title = title;
     }
+
+    public Category() {
+
+    }
 }
