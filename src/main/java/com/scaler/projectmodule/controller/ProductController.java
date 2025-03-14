@@ -2,10 +2,7 @@ package com.scaler.projectmodule.controller;
 
 import com.scaler.projectmodule.models.Product;
 import com.scaler.projectmodule.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ProductController {
@@ -18,8 +15,8 @@ public class ProductController {
 
     //@RequestMapping(value = "/Products", method = RequestMethod.POST)
     @PostMapping("/products")
-    public void createProduct(Product product) {
-        //for commit
+    public Product createProduct(@RequestBody Product product) {
+        return productService.createProduct(product.getTitle(),product.getDescription(),product.getPrice(), product.getImageURL(), product.getCategory().getTitle());
     }
 
     public void updateProduct(Product product) {
@@ -31,6 +28,6 @@ public class ProductController {
     }
     @GetMapping("/products/{id}")
     public Product getProductById(@PathVariable("id") long id) {
-        return null;
+        return productService.getSingleProduct(id);
     }
 }
