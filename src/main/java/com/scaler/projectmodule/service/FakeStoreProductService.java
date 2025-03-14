@@ -2,6 +2,7 @@ package com.scaler.projectmodule.service;
 
 import com.scaler.projectmodule.DTO.FakeStoreProductDTO;
 import com.scaler.projectmodule.models.Product;
+import exceptions.ProductNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,10 +19,14 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public Product getSingleProduct(long id) {
+    public Product getSingleProduct(long id) throws ProductNotFoundException {
         FakeStoreProductDTO fakeStoreProductDTO = restTemplate.getForObject("https://fakestoreapi.com/products/" + id, FakeStoreProductDTO.class);
-        assert fakeStoreProductDTO != null;
-        System.out.println(fakeStoreProductDTO.toString());
+        //System.out.println(fakeStoreProductDTO.toString());
+
+        if(fakeStoreProductDTO == null){
+            throw new ProductNotFoundException("Product not found with id "+ id);
+        }
+
         return fakeStoreProductDTO.getProduct();
     }
 
