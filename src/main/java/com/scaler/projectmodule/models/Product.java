@@ -1,24 +1,17 @@
 package com.scaler.projectmodule.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
-public class Product {
-    private long id;
+@Entity
+public class Product extends Base{
     private String title;
     private String description;
     private double price;
     private int quantity;
     private String imageURL;
+    @ManyToOne
     private Category category;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -68,8 +61,7 @@ public class Product {
         this.category = category;
     }
 
-    public Product(long id, String title, String description, double price, int quantity, String imageURL, Category category) {
-        this.id = id;
+    public Product(String title, String description, double price, int quantity, String imageURL, Category category) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -79,6 +71,5 @@ public class Product {
     }
 
     public Product() {
-
     }
 }

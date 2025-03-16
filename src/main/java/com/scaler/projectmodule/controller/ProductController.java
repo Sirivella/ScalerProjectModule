@@ -4,6 +4,7 @@ import com.scaler.projectmodule.DTO.ErrorDTO;
 import com.scaler.projectmodule.models.Product;
 import com.scaler.projectmodule.service.ProductService;
 import exceptions.ProductNotFoundException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ProductController {
 
-    ProductService productService;
+    private ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("selfProductService") ProductService productService) {
         this.productService = productService;
     }
 
